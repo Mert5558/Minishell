@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/27 11:46:46 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/30 13:18:41 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef struct s_env
 }t_env;
 
 
-
+char	*ft_get_input(void);
+int		ft_check_input(char *input);
 
 
 
