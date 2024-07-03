@@ -6,13 +6,14 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/30 13:18:41 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/03 15:05:15 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -54,6 +55,9 @@ typedef struct s_env
 
 char	*ft_get_input(void);
 int		ft_check_input(char *input);
+int		ft_check_syntax(char *input);
+int		ft_check_op(char *input);
+int		ft_check_syntax_op(char *input);
 
 
 
