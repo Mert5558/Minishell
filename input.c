@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/03 15:05:31 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/04 15:15:18 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int	ft_check_input(char *input)
 	ft_check_syntax(input);
 	ft_check_op(input);
 	ft_check_syntax_op(input);
-	
+
 	return (0);
 }
