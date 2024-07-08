@@ -6,7 +6,7 @@
 #    By: merdal <merdal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 12:50:20 by merdal            #+#    #+#              #
-#    Updated: 2024/07/02 12:14:46 by merdal           ###   ########.fr        #
+#    Updated: 2024/07/08 13:34:50 by merdal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME = 	minishell
 
 SRCS =	minishell.c \
 		input.c \
-		input2.c
+		input2.c \
+		handle_dollar.c \
 
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
