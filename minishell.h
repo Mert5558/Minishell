@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/03 15:05:15 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/12 14:38:52 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -46,18 +47,30 @@ typedef struct s_token
 	t_token_type	type;
 }t_token;
 
+typedef struct s_varlst
+{
+	char *var_name;
+	char *var_value;
+	struct s_varlst *next;
+}t_varlst;
+
 typedef struct s_env
 {
-	char	*key;
-	char	*value;
+	char		**envp;
+	t_varlst 	*envp_list;
+	char		*key;
+	char		*value;
+	long long	exit_status;
 }t_env;
 
 
 char	*ft_get_input(void);
-int		ft_check_input(char *input);
-int		ft_check_syntax(char *input);
-int		ft_check_op(char *input);
-int		ft_check_syntax_op(char *input);
+int		ft_check_input(char *input, t_env *env);
+int		ft_check_syntax(char *input, t_env *env);
+int		ft_check_op(char *input, t_env *env);
+int		ft_check_syntax_op(char *input, t_env *env);
+char	*ft_handle_dollar(char *input, t_env *env);
+void	ft_init(char **envp, t_env *env);
 
 
 
