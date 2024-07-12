@@ -6,7 +6,7 @@
 #    By: merdal <merdal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 12:50:20 by merdal            #+#    #+#              #
-#    Updated: 2024/07/08 13:34:50 by merdal           ###   ########.fr        #
+#    Updated: 2024/07/11 16:12:35 by merdal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS =	minishell.c \
 		input.c \
 		input2.c \
 		handle_dollar.c \
+		ft_init.c \
 
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
@@ -35,11 +36,13 @@ $(NAME): $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
-	@make -C libft clean
+	@make -C libft clean > /dev/null
+	@echo "\033[0;32mObject files removed\033[0m"
 
 fclean: clean
 	$(RM) $(NAME)
-	@make -C libft fclean
+	@make -C libft fclean > /dev/null
+	@echo "\033[0;32mCleaned\033[0m"
 
 re: fclean all
 
