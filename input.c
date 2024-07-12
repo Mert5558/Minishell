@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/04 15:15:18 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/12 12:20:28 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,29 @@ int	ft_check_quotes(char *input)
 		return (1);
 }
 
-int	ft_check_input(char *input)
+int	ft_check_input(char *input, t_env *env)
 {
 	if (input == NULL)
 	{
 		printf("Error: input is NULL\n");
+		env->exit_status = 1;
 		return (1);
 	}
 	if (input[0] == '\0')
 	{
 		printf("Error: input is empty\n");
+		env->exit_status = 1;
 		return (1);
 	}
 	if (ft_check_quotes(input))
 	{
 		printf("Error: unclosed quotes\n");
+		env->exit_status = 1;
 		return (1);
 	}
-	ft_check_syntax(input);
-	ft_check_op(input);
-	ft_check_syntax_op(input);
+	ft_check_syntax(input, env);
+	ft_check_op(input, env);
+	ft_check_syntax_op(input, env);
 
 	return (0);
 }
