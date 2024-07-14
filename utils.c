@@ -1,39 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/14 17:04:25 by merdal           ###   ########.fr       */
+/*   Created: 2024/07/14 17:20:50 by merdal            #+#    #+#             */
+/*   Updated: 2024/07/14 17:38:02 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **envp)
+void	ft_return_and_exit(char *error, int exit_status, t_env *env)
 {
-	t_env	*env;
-	char 	*input;
-	char 	*amk;
-
-	env = malloc(sizeof(t_env));
-	amk = argv[0];
-	env->envp = envp;
-	ft_init(envp, env);
-	if (argc != 1)
-	{
-		printf("Error: too many arguments\n");
-		return (1);
-	}
-	while (1)
-	{
-		input = ft_get_input();
-		ft_check_input(input, env);
-		add_history(input);
-		input = ft_handle_dollar(input, env);
-		printf("%s\n", input);
-	}
-	return (0);
+	printf("%s\n", error);
+	env->exit_status = exit_status;
 }

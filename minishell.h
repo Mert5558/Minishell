@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/12 14:38:52 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/14 17:38:15 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		ft_check_op(char *input, t_env *env);
 int		ft_check_syntax_op(char *input, t_env *env);
 char	*ft_handle_dollar(char *input, t_env *env);
 void	ft_init(char **envp, t_env *env);
-
+void	ft_return_and_exit(char *error, int exit_status, t_env *env);
 
 
 #endif
