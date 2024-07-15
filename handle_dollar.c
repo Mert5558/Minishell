@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 14:36:45 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/15 12:19:39 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/15 16:27:03 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_search_env_variable(char *env_variable, t_env *env)
 	current = env->envp_list;
 	while (current != NULL)
 	{
-		if (ft_strncmp(current->var_name, env_variable, ft_strlen(env_variable)) == 0)
+		if (ft_strcmp(current->var_name, env_variable) == 0)
 		{
 			new_variable = ft_strdup(current->var_value);
 			if (new_variable == NULL)
@@ -60,7 +60,7 @@ char	*ft_replace(char *input, int i, t_env *env)
 	env_variable = malloc(sizeof(char) * (len - i) + 1);
 	if (!env_variable)
 		return (NULL);
-	while (j < len - i)
+	while (j < len)
 	{
 		env_variable[j] = input[i];
 		i++;
