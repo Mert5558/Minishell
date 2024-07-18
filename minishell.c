@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/14 17:04:25 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/18 12:25:49 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int main(int argc, char **argv, char **envp)
 		input = ft_get_input();
 		ft_check_input(input, env);
 		add_history(input);
-		input = ft_handle_dollar(input, env);
+		// input = ft_handle_dollar(input, env);
+		printf("%d\n", ft_count_tokens(input));
 		printf("%s\n", input);
+		
 	}
 	return (0);
 }
