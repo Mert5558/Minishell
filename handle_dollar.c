@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 14:36:45 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/15 16:27:03 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/19 15:17:20 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_exitstatus(t_env *env)
 char	*ft_handle_dollar(char *input, t_env *env)
 {
 	int		i;
-	int 	quote;			//quote bool in struct;
+	int 	quote;
 	char	*new_input = NULL;
 
 	i = 0;
@@ -99,6 +99,5 @@ char	*ft_handle_dollar(char *input, t_env *env)
 	}
 	if (new_input == NULL)
 		new_input = ft_strdup(input);
-	free(input);
 	return (new_input);
 }
