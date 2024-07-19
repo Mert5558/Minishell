@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:35:03 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/19 15:43:18 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/19 16:04:37 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,25 @@ int	ft_token_len(char *input, int i)
     return (len);
 }
 
+char	*ft_cut(char *input, int i, int len)
+{
+	char 	*cut;
+	int		j;
+
+	j = 0;
+	cut = malloc(sizeof(char) * len + 1);
+	if (!cut)
+		return (NULL);
+	while (input[i] != ' ' && input[i])
+	{
+		cut[j] = input[i];
+		i++;
+		j++;
+	}
+	cut[j] = '\0';
+	return (cut);
+}
+
 char	**ft_create_array(char *input, t_env *env)
 {
 	int	i;
@@ -97,8 +116,9 @@ char	**ft_create_array(char *input, t_env *env)
 			i++;
 		if (input[i] == '$')
 		{
-			array[j] = ft_handle_dollar(input, env); // neue funktion
-			i = i + ft_strlen(array[j]);
+			len = ft_token_len(input, i);
+			array[j] = ft_handle_dollar(ft_cut(input, i, len), env);
+			i = i + len;
 			j++;
 		}
 		else
