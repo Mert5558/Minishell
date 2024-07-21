@@ -6,11 +6,23 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/19 14:59:25 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/21 13:11:01 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void print_arrays(char **arrays)
+{
+    if (arrays == NULL) {
+        printf("Array is NULL\n");
+        return;
+    }
+
+    for (int i = 0; arrays[i] != NULL; i++) {
+        printf("%s\n", arrays[i]);
+    }
+}
 
 int main(int argc, char **argv, char **envp)
 {
@@ -34,8 +46,7 @@ int main(int argc, char **argv, char **envp)
 		ft_check_input(input, env);
 		add_history(input);
 		array = ft_create_array(input, env);
-		printf("%s\n", array[0]);
-		printf("%s\n", array[1]);
+		print_arrays(array);
 	}
 	return (0);
 }
