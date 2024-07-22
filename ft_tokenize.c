@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:35:03 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/22 11:52:57 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/22 12:58:33 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,72 +99,88 @@ char	*ft_cut(char *input, int i, int len)
 	return (cut);
 }
 
+char	*ft_expand(char *input, int *i, t_env *env)
+{
+	int		len;
+	char	*token;
+
+	len = ft_token_len(input, *i);
+	token = ft_handle_dollar(ft_cut(input, *i, len), env);
+	*i = *i + len;
+	return (token);
+}
+
+char	*ft_handle_quotes(char *input, int *i)
+{
+	int		len;
+	int		x;
+	char	quote;
+	char	*token;
+
+	quote = input[(*i)++];
+	len = 0;
+	while (input[*i + len] && input[*i + len] != quote)
+		len++;
+	len = len + 2;
+	token = malloc(sizeof(char) * (len + 1));
+	if (!token)
+		return (NULL);
+	token[0] = quote;
+	x = 1;
+	while (x < len - 1)
+	{
+		token[x] = input[*i];
+		x++;
+		(*i)++;
+	}
+	token[len - 1] = quote;
+	token[len] = '\0';
+	(*i)++;
+	return (token);
+}
+
+char	*ft_handle_regular(char *input, int *i)
+{
+	int		len;
+	int		x;
+	char	*token;
+
+	len = ft_token_len(input, *i);
+	token = malloc(sizeof(char) *(len + 1));
+	if (!token)
+		return (NULL);
+	x = 0;
+	while (x < len)
+	{
+		token[x] = input[*i];
+		x++;
+		(*i)++;
+	}
+	token[len] = '\0';
+	return (token);
+}
+
 char	**ft_create_array(char *input, t_env *env)
 {
 	int		i;
 	int		j;
-	int		x;
-	int		len;
-	char	quote;
 	char	**array;
 
 	i = 0;
 	j = 0;
-	x = 0;
-	len = 0;
-	array = malloc(sizeof(char *) * ft_count_tokens(input) + 1);
+	array = malloc(sizeof(char *) * (ft_count_tokens(input) + 1));
 	if (!array)
 		return (NULL);
 	while (j < ft_count_tokens(input))
 	{
-		x = 0;
 		while (input[i] == ' ')
 			i++;
 		if (input[i] == '$')
-		{
-			len = ft_token_len(input, i);
-			array[j] = ft_handle_dollar(ft_cut(input, i, len), env);
-			i = i + len;
-			j++;
-		}
+			array[j++] = ft_expand(input, &i, env);
 		else if (input[i] == '"' || input[i] == '\'')
-		{
-			quote = input[i++];
-			len = 0;
-			while (input[i + len] && input[i + len] != quote)
-				len++;
-			len += 2;
-			array[j] = malloc(sizeof(char) * (len + 1));
-			if (!array[j])
-				return (NULL);
-			array[j][0] = quote;
-			x = 1;
-			while (x < len - 1)
-			{
-				array[j][x] = input[i];
-				x++;
-				i++;
-			}
-			array[j][x] = quote;
-			array[j][x + 1] = '\0';
-			i++;
-			j++;
-		}
+			array[j++] = ft_handle_quotes(input, &i);
 		else
-		{
-			len = ft_token_len(input, i);
-			array[j] = malloc(sizeof(char) * len + 1);
-			if (!array[j])
-				return (NULL);
-			while (input[i] && x < len)
-			{
-				array[j][x] = input[i];
-				i++;
-				x++;
-			}
-			array[j][x] = '\0';
-			j++;
-		}
+			array[j++] = ft_handle_regular(input, &i);
 	}
 	array[j] = NULL;
 	return (array);
