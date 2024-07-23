@@ -6,7 +6,7 @@
 #    By: merdal <merdal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 12:50:20 by merdal            #+#    #+#              #
-#    Updated: 2024/07/18 12:25:08 by merdal           ###   ########.fr        #
+#    Updated: 2024/07/23 11:38:44 by merdal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,8 @@ CFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -Llibft -lft -lreadline
 NAME = 	minishell
 
-SRCS =	minishell.c \
-		input.c \
-		input2.c \
-		handle_dollar.c \
-		ft_init.c \
-		utils.c \
-		ft_tokenize.c
+SRCS =	minishell.c input.c input2.c handle_dollar.c \
+		ft_init.c utils.c ft_tokenize.c
 
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
@@ -34,18 +29,21 @@ $(LIBFT):
 	@echo "\033[0;32mlibft compiled\033[0m"
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
+	@$(CC) $(OBJS) -o $(NAME) $(LDFLAGS) > /dev/null
+	@echo "\033[0;32mminishell compiled\033[0m"
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 	@make -C libft clean > /dev/null
 	@echo "\033[0;32mObject files removed\033[0m"
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 	@make -C libft fclean > /dev/null
 	@echo "\033[0;32mCleaned\033[0m"
 
-re: fclean all
+re: fclean 
+	@echo "---------------------"
+	@$(MAKE) all
 
 .PHONY: all clean fclean re

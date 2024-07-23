@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/19 14:59:36 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/23 11:23:07 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_init(char **envp, t_env *env);
 void	ft_return_and_exit(char *error, int exit_status, t_env *env);
 int		ft_count_tokens(char *input);
 char	**ft_create_array(char *input, t_env *env);
+int		ft_count_tokens(char *input);
+int		ft_token_len(char *input, int i);
 
 
 #endif
