@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:11:55 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/29 15:10:12 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/30 12:48:17 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_array_len(char **array)
 	len = 0;
 	if (!array)
 		return (0);
-	while (array[len])
+	while (array[len] && !ft_is_operator(array[len]))
 		len++;
 	return (len);
 }
@@ -70,7 +70,6 @@ t_cmd	*ft_parser(char *input, t_env *env)
 		arg_index = 0;
 		while (array[i] && !ft_is_operator(array[i]))
 		{
-			
 			temp->args[arg_index] = array[i];
 			i++;
 			arg_index++;
@@ -81,8 +80,13 @@ t_cmd	*ft_parser(char *input, t_env *env)
 			temp->command = array[i];
 			i++;
 		}
-		temp->next = ft_new_node();
-		i++;
+		else
+			temp->command = NULL;
+		if (array[i] != NULL)
+		{
+			temp->next = ft_new_node();
+			temp = temp->next;
+		}
 	}
 	temp->next = NULL;
 	return (cmd_head);
