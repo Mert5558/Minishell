@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/23 11:23:07 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/29 13:32:52 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ typedef enum e_token_type
 
 typedef struct s_cmd
 {
-	char	*cmd;
+	char	*command;
 	char	**args;
 	int		input_fd;
 	int		output_fd;
+	struct s_cmd	*next;
 }t_cmd;
 
 typedef struct s_token
@@ -76,6 +77,6 @@ int		ft_count_tokens(char *input);
 char	**ft_create_array(char *input, t_env *env);
 int		ft_count_tokens(char *input);
 int		ft_token_len(char *input, int i);
-
+t_cmd	*ft_parser(char *input, t_env *env);
 
 #endif

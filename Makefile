@@ -6,7 +6,7 @@
 #    By: merdal <merdal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 12:50:20 by merdal            #+#    #+#              #
-#    Updated: 2024/07/23 11:38:44 by merdal           ###   ########.fr        #
+#    Updated: 2024/07/29 13:33:04 by merdal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LDFLAGS = -Llibft -lft -lreadline
 NAME = 	minishell
 
 SRCS =	minishell.c input.c input2.c handle_dollar.c \
-		ft_init.c utils.c ft_tokenize.c
+		ft_init.c utils.c tokenize.c parser.c
 
 OBJS = $(SRCS:.c=.o)
 RM = rm -f

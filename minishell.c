@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/21 13:11:01 by merdal           ###   ########.fr       */
+/*   Updated: 2024/07/30 12:51:30 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,53 @@ void print_arrays(char **arrays)
     }
 }
 
+void print_cmd_struct(const t_cmd *cmd)
+{
+    int i = 0;
+
+    while (cmd != NULL) // Loop through each command in the linked list
+    {
+        printf("Command: %s\n", cmd->command);
+        printf("Arguments:\n");
+        i = 0; // Reset index for arguments array
+        if (cmd->args)
+        {
+            while (cmd->args[i])
+            {
+                printf("  [%d]: %s\n", i, cmd->args[i]);
+                i++;
+            }
+        }
+        else
+        {
+            printf("  None\n");
+        }
+        printf("Input FD: %d\n", cmd->input_fd);
+        printf("Output FD: %d\n", cmd->output_fd);
+
+        // Move to the next command in the list, if it exists
+        if (cmd->next)
+        {
+            printf("Moving to next command...\n");
+            cmd = cmd->next;
+        }
+        else
+        {
+            printf("No next command.\n");
+            break; // Exit the loop if there is no next command
+        }
+    }
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
+	t_cmd	*cmd;
 	char 	*input;
 	char 	*amk;
-	char **array;
 
 	env = malloc(sizeof(t_env));
+	cmd = malloc(sizeof(t_cmd));
 	amk = argv[0];
 	env->envp = envp;
 	ft_init(envp, env);
@@ -45,8 +84,8 @@ int main(int argc, char **argv, char **envp)
 		input = ft_get_input();
 		ft_check_input(input, env);
 		add_history(input);
-		array = ft_create_array(input, env);
-		print_arrays(array);
+		cmd = ft_parser(input, env);
+		print_cmd_struct(cmd);
 	}
 	return (0);
 }
