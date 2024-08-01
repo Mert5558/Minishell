@@ -6,7 +6,7 @@
 #    By: merdal <merdal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 12:50:20 by merdal            #+#    #+#              #
-#    Updated: 2024/07/29 13:33:04 by merdal           ###   ########.fr        #
+#    Updated: 2024/07/30 14:15:23 by merdal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ SRCS =	minishell.c input.c input2.c handle_dollar.c \
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
 LIBFT = libft/libft.a
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@ > /dev/null 2>&1
 
 all: $(LIBFT) $(NAME)
 
