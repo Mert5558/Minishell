@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/31 12:14:37 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/17 12:42:13 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void print_cmd_struct(const t_cmd *cmd)
         {
             printf("  None\n");
         }
-        printf("Command: %s\n", cmd->command);
+        printf("Operator: %s\n", cmd->command);
         printf("Input FD: %d\n", cmd->input_fd);
         printf("Output FD: %d\n", cmd->output_fd);
 
