@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:11:55 by merdal            #+#    #+#             */
-/*   Updated: 2024/08/01 12:10:37 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:28:40 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,66 @@ int	ft_array_len(char **array)
 	return (len);
 }
 
+t_cmd	*ft_set_fd(char **array, int i, t_cmd *cmd)
+{
+	if (array[i] && ft_strcmp(array[i], ">" ) == 0)
+	{
+		cmd->output_fd = open(array[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (cmd->output_fd == -1)
+		{
+			perror("open");
+			return (NULL);
+		}
+	}
+	else if(array[i] && ft_strcmp(array[i], ">>") == 0)
+	{
+		cmd->output_fd = open(array[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (cmd->output_fd == -1)
+		{
+			perror("open");
+			return (NULL);
+		}
+	}
+	else if(array[i] && ft_strcmp(array[i], "<") == 0)
+	{
+		cmd->input_fd = open(array[i + 1], O_RDONLY);
+		if (cmd->input_fd == -1)
+		{
+			perror("open");
+			return (NULL);
+		}
+	}
+	else if(array[i] && ft_strcmp(array[i], "<<") == 0)
+	{
+		
+	}
+	else if(array[i] && ft_strcmp(array[i], "|") == 0)
+	{
+		int	pipe_fd[2];
+		if (pipe(pipe_fd) == -1)
+		{
+			perror("pipe");
+			return (NULL);
+		}
+		cmd->output_fd = pipe_fd[1];
+		if(cmd->output_fd == -1)
+		{
+			perror("pipe");
+			return (NULL);
+		}
+		if (cmd->next != NULL)
+		{
+			cmd->next->input_fd = pipe_fd[0];
+			if (cmd->next->input_fd == -1)
+			{
+				perror("pipe");
+				return (NULL);
+			}
+		}
+	}
+	return (cmd);
+}
+
 t_cmd	*ft_parser(char *input, t_env *env)
 {
 	int		i;
@@ -78,6 +138,7 @@ t_cmd	*ft_parser(char *input, t_env *env)
 		if (array[i] && ft_is_operator(array[i]))
 		{
 			temp->command = array[i];
+			temp = ft_set_fd(array, i, temp);
 			i++;
 		}
 		else
