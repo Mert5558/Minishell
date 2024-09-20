@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/17 12:42:08 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/20 15:20:07 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -35,7 +36,7 @@ typedef enum e_token_type
 
 typedef struct s_cmd
 {
-	char	*command;
+	char	*operator;
 	char	**args;
 	int		input_fd;
 	int		output_fd;
@@ -78,5 +79,6 @@ char	**ft_create_array(char *input, t_env *env);
 int		ft_count_tokens(char *input);
 int		ft_token_len(char *input, int i);
 t_cmd	*ft_parser(char *input, t_env *env);
+t_cmd	*ft_set_fds(t_cmd *temp);
 
 #endif
