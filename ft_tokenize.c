@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:35:03 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/23 11:23:12 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/23 14:16:53 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,3 @@ char	**ft_create_array(char *input, t_env *env)
 	array[j] = NULL;
 	return (array);
 }
-
-// void	ft_tokenizer()
-// {
-	
-// }

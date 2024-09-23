@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:11:55 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/20 15:46:15 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:31:24 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	ft_is_operator(char *str)
 	if (!str)
 		return (0);
 	if (ft_strcmp(str, ">") == 0 || ft_strcmp(str, ">>") == 0 ||
-		ft_strcmp(str, "<") == 0 || ft_strcmp(str, "|") == 0)
+		ft_strcmp(str, "<") == 0 || ft_strcmp(str, "<<") == 0 ||
+		ft_strcmp(str, "|") == 0)
 		return (1);
 	return (0);
 }

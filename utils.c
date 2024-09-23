@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:20:50 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/23 11:22:57 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:23:10 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,17 @@ int	ft_count_tokens(char *input)
 	quotes = 0;
 	while (*input)
 	{
-		if (*input == '|' || *input == '&' || *input == ';' || *input == '<')
+		if (*input == '|' || *input == '&' || *input == ';')
 			count += !quotes;
 		else if (*input == '>')
 		{
 			if (*(input + 1) == '>')
+				input++;
+			count += !quotes;
+		}
+		else if (*input == '<')
+		{
+			if (*(input + 1) == '<')
 				input++;
 			count += !quotes;
 		}
@@ -65,6 +71,8 @@ int	ft_token_len(char *input, int i)
 		|| input[i] == '>' || input[i] == '<')
 	{
 		if (input[i] == '>' && input[i + 1] == '>')
+			return (2);
+		if (input[i] == '<' && input[i + 1] == '<')
 			return (2);
 		return (1);
 	}

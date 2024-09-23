@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/17 12:42:13 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/23 12:46:22 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void print_cmd_struct(const t_cmd *cmd)
         {
             printf("  None\n");
         }
-        printf("Operator: %s\n", cmd->command);
+        printf("operator: %s\n", cmd->operator);
         printf("Input FD: %d\n", cmd->input_fd);
         printf("Output FD: %d\n", cmd->output_fd);
 
@@ -86,6 +86,7 @@ int main(int argc, char **argv, char **envp)
 		add_history(input);
 		cmd = ft_parser(input, env);
 		print_cmd_struct(cmd);
+		ft_check_args(cmd, env);
 	}
 	return (0);
 }
