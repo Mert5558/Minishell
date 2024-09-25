@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
-# include <limits.h>				//PATH_MAX
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
