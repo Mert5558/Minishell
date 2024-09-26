@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/20 16:15:52 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/25 12:36:15 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
-# include <limits.h>
+# include <limits.h>				//PATH_MAX
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -69,7 +70,7 @@ typedef struct s_env
 //_______________________minishell.c_______________________________
 //_______________________ft_parser.c_______________________________
 t_cmd		*ft_parser(char *input, t_env *env);
-t_cmd	*ft_set_fds(t_cmd *temp);
+t_cmd		*ft_set_fds(t_cmd *temp);
 
 //_______________________tokenize.c________________________________
 char		**ft_create_array(char *input, t_env *env);
@@ -78,6 +79,11 @@ char		**ft_create_array(char *input, t_env *env);
 int			ft_token_len(char *input, int i);
 int			ft_count_tokens(char *input);
 void		ft_return_and_exit(char *error, int exit_status, t_env *env);
+void		ft_fd_rdr(t_cmd *temp);
+void		ft_fd_rdrapp(t_cmd *temp);
+void		ft_fd_rdr2(t_cmd *temp);
+void		ft_fd_heredoc(t_cmd *temp);
+void		ft_pipe(t_cmd *temp);
 
 //_______________________input.c___________________________________
 char		*ft_get_input(void);
@@ -92,12 +98,17 @@ int			ft_check_syntax_op(char *input, t_env *env);
 char		*ft_handle_dollar(char *input, t_env *env);
 
 //_______________________ft_init.c_________________________________
+void		ft_free_split(char **arr);
 void		ft_init(char **envp, t_env *env);
 void		add_varlst_node(t_varlst **head, t_varlst *new_node);
 t_varlst	*new_varlst_node(char *var_name, char *var_value);
 
 //_______________________ft_check_args.c___________________________
 void		*ft_check_args(const t_cmd *cmd, t_env *env);
+void		redirect_fd(const t_cmd *cmd);
+void		execute_parent(const t_cmd *cmd, t_env *env);
+void		execute_child(const t_cmd *cmd, t_env *env);
+void		check_executable(const t_cmd *cmd, t_env *env);
 
 //_______________________ft_echo.c_________________________________
 char		*ft_append_char_struct(const t_cmd *cmd, int i);
@@ -111,6 +122,7 @@ void		ft_pwd(void);
 
 //_______________________ft_exe.c__________________________________
 void		ft_exe(const t_cmd *cmd, t_env *env);
+void		ft_exe2(const t_cmd *cmd, t_env *env, char **tmp_path);
 
 //_______________________ft_export.c_______________________________
 void		ft_export(const t_cmd *cmd, t_env *env);
@@ -125,5 +137,8 @@ void		ft_env(t_env *env);
 void		ft_unset(const t_cmd *cmd, t_env *env);
 
 //_______________________ft_exit.c_________________________________
+
+//_______________________ft_clear.c_________________________________
+void		ft_clear(void);
 
 #endif

@@ -6,68 +6,67 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/23 12:46:22 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/25 12:48:01 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_arrays(char **arrays)
+void	print_arrays(char **arrays)
 {
-    if (arrays == NULL) {
-        printf("Array is NULL\n");
-        return;
-    }
+	if (arrays == NULL) {
+		printf("Array is NULL\n");
+		return;
+	}
 
     for (int i = 0; arrays[i] != NULL; i++) {
         printf("%s\n", arrays[i]);
     }
 }
 
-void print_cmd_struct(const t_cmd *cmd)
+void	print_cmd_struct(const t_cmd *cmd)
 {
-    int i = 0;
+	int i = 0;
 
-    while (cmd != NULL) // Loop through each command in the linked list
-    {
-        printf("Arguments:\n");
-        i = 0; // Reset index for arguments array
-        if (cmd->args)
-        {
-            while (cmd->args[i])
-            {
-                printf("  [%d]: %s\n", i, cmd->args[i]);
-                i++;
-            }
-        }
-        else
-        {
-            printf("  None\n");
-        }
-        printf("operator: %s\n", cmd->operator);
-        printf("Input FD: %d\n", cmd->input_fd);
-        printf("Output FD: %d\n", cmd->output_fd);
-
-        // Move to the next command in the list, if it exists
-        if (cmd->next)
-        {
-            printf("Moving to next command...\n");
-            cmd = cmd->next;
-        }
-        else
-        {
-            printf("No next command.\n");
-            break; // Exit the loop if there is no next command
-        }
-    }
+	while (cmd != NULL) // Loop through each command in the linked list
+	{
+		printf("Arguments:\n");
+		i = 0; // Reset index for arguments array
+		if (cmd->args)
+		{
+			while (cmd->args[i])
+			{
+				printf("  [%d]: %s\n", i, cmd->args[i]);
+				i++;
+			}
+		}
+		else
+		{
+			printf("  None\n");
+		}
+		printf("operator: %s\n", cmd->operator);
+		printf("Input FD: %d\n", cmd->input_fd);
+		printf("Output FD: %d\n", cmd->output_fd);	
+		// Move to the next command in the list, if it exists
+		if (cmd->next)
+		{
+			printf("Moving to next command...\n");
+			cmd = cmd->next;
+		}
+		else
+		{
+			printf("No next command.\n");
+			break; // Exit the loop if there is no next command
+		}
+	}
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_env	*env;
-	t_cmd	*cmd;
-	char 	*input;
-	char 	*amk;
+	t_env				*env;
+	t_cmd				*cmd;
+	char				*input;
+	char				*amk;
 
 	env = malloc(sizeof(t_env));
 	cmd = malloc(sizeof(t_cmd));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/14 17:38:35 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/25 10:49:40 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ char	*ft_get_input(void)
 	char	*input;
 
 	input = readline(" -- minishell -- $ ");
+	if (input == NULL)
+	{
+		printf("exit\n");
+		exit (0);
+	}
 	return (input);
 }
 
