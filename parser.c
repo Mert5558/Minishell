@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:11:55 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/26 12:52:00 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/27 12:02:00 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void	ft_handle_operator(t_cmd *temp, char **array, int *i)
 	{
 		temp->operator = array[*i];
 		(*i)++;
+		if (ft_strcmp(temp->operator, "<<") == 0 && array[*i])
+			temp->heredoc_delimiter = array[*i];
 	}
 	else
 		temp->operator = NULL;

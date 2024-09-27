@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/25 12:48:01 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:38:45 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_check_input(input, env);
 		add_history(input);
 		cmd = ft_parser(input, env);
-		print_cmd_struct(cmd);
+		//print_cmd_struct(cmd);
 		ft_check_args(cmd, env);
 	}
 	return (0);

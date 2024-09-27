@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/25 12:36:15 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:33:36 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_cmd
 	char			**args;
 	int				input_fd;
 	int				output_fd;
+	char			*heredoc_delimiter;
 	struct s_cmd	*next;
 }t_cmd;
 

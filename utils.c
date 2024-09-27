@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:20:50 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/26 13:01:06 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/26 13:47:33 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	ft_return_and_exit(char *error, int exit_status, t_env *env)
 {
-	printf("%s\n", error);
+	if (error == NULL)
+		printf("");
+	else
+		printf("%s\n", error);
 	env->exit_status = exit_status;
 }
 

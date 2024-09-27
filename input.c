@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
+/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/25 10:49:40 by mgering          ###   ########.fr       */
+/*   Updated: 2024/09/26 13:50:57 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int	ft_check_input(char *input, t_env *env)
 	}
 	if (input[0] == '\0')
 	{
-		ft_return_and_exit("Error: input is empty", 1, env);
+		ft_return_and_exit(NULL, 2, env);
 		return (1);
 	}
 	if (ft_check_quotes(input))
 	{
-		ft_return_and_exit("Error: unclosed quotes", 1, env);
+		ft_return_and_exit("Error: unclosed quotes", 2, env);
 		return (1);
 	}
 	ft_check_syntax(input, env);

@@ -6,11 +6,25 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:51:08 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/25 11:40:59 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:21:00 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// void	ft_fix_struct(t_cmd *cmd_head)
+// {
+// 	t_cmd	*current;
+
+// 	current = cmd_head;
+// 	while (current)
+// 	{
+// 		if (current->operator && ft_strcmp(current->operator, "<<") == 0)
+// 		{
+			
+// 		}
+// 	}
+// }
 
 t_cmd	*ft_set_fds(t_cmd *temp)
 {
@@ -31,6 +45,7 @@ t_cmd	*ft_set_fds(t_cmd *temp)
 			ft_pipe(temp);
 		temp = temp->next;
 	}
+	
 	return (new_head);
 }
 
