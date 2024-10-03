@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
+/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:23:00 by mgering           #+#    #+#             */
-/*   Updated: 2024/09/25 10:58:09 by mgering          ###   ########.fr       */
+/*   Updated: 2024/09/30 12:35:14 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_check_args(const t_cmd *cmd, t_env *env)
 
 	tmp_cmd = cmd;
 	if (tmp_cmd->args == NULL)
+		return (NULL);
+	if (env->exec_flag == 1)
 		return (NULL);
 	while (tmp_cmd)
 	{
@@ -75,15 +77,16 @@ void	execute_child(const t_cmd *cmd, t_env *env)
 	pid = fork();
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, child_signal_handler);
 		redirect_fd(cmd);
 		check_executable(cmd, env);
 		exit(EXIT_SUCCESS);
 	}
 	else if (pid > 0)
 	{
+		signal (SIGINT, SIG_IGN);
 		wait(NULL);
+		init_signal_handler();
 		if (cmd->input_fd != STDIN_FILENO)
 			close(cmd->input_fd);
 		if (cmd->output_fd != STDOUT_FILENO)

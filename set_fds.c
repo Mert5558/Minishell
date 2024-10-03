@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:51:08 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/27 14:21:00 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/02 13:48:17 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 // 		{
 			
 // 		}
+// 		current = current->next;
 // 	}
 // }
 
@@ -45,7 +46,6 @@ t_cmd	*ft_set_fds(t_cmd *temp)
 			ft_pipe(temp);
 		temp = temp->next;
 	}
-	
 	return (new_head);
 }
 

@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:12:32 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/02 13:20:50 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/02 14:03:48 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	*ft_handle_quotes(char *input, int *i, t_env *env)
 	char	quote;
 	char	*token;
 
-	printf("handle quotes\n");
 	quote = input[(*i)++];
 	len = 0;
 	while (input[*i + len] && input[*i + len] != quote)
@@ -77,7 +76,6 @@ char	*ft_handle_regular(char *input, int *i)
 	int		x;
 	char	*token;
 
-	printf("handle regular\n");
 	len = ft_token_len(input, *i);
 	token = malloc(sizeof(char) *(len + 1));
 	if (!token)
@@ -92,7 +90,6 @@ char	*ft_handle_regular(char *input, int *i)
 	token[len] = '\0';
 	return (token);
 }
-
 
 char	**ft_create_array(char *input, t_env *env)
 {

@@ -6,20 +6,25 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/26 13:50:57 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/02 13:57:34 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_input(void)
+char	*ft_get_input()
 {
 	char	*input;
 
 	input = readline(" -- minishell -- $ ");
-	if (input == NULL)
+	if (g_signal_received == SIGINT)
 	{
-		printf("exit\n");
+		//free_cmd(cmd);
+		return (NULL);
+	}
+	if (input == NULL || ft_strcmp(input, "exit") == 0)
+	{
+		printf("exit");
 		exit (0);
 	}
 	return (input);
@@ -27,8 +32,8 @@ char	*ft_get_input(void)
 
 int	ft_check_quotes(char *input)
 {
-	char 	quote_type;
-	int 	i;
+	char	quote_type;
+	int		i;
 
 	quote_type = 0;
 	i = 0;
@@ -72,6 +77,5 @@ int	ft_check_input(char *input, t_env *env)
 	ft_check_syntax(input, env);
 	ft_check_op(input, env);
 	ft_check_syntax_op(input, env);
-
 	return (0);
 }

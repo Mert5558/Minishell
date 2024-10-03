@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 14:36:45 by merdal            #+#    #+#             */
-/*   Updated: 2024/07/19 15:17:20 by merdal           ###   ########.fr       */
+/*   Updated: 2024/09/30 15:27:32 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*ft_handle_dollar(char *input, t_env *env)
 	quote = 0;
 	while (input[i])
 	{
-		if (input[i] == '\'' || input[i] == '\"')
+		if (input[i] == '\"')
 			quote = 1;
 		if (input[i] == '$' && input[i + 1] == '?')
 			new_input = ft_exitstatus(env);

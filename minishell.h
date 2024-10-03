@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/27 14:33:36 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/03 12:58:32 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,11 @@
 # include <fcntl.h>
 # include <limits.h>				//PATH_MAX
 # include <signal.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef enum e_token_type
-{
-	TOKEN_CMD,
-	TOKEN_ARG,
-	TOKEN_PIPE,
-	TOKEN_OPERATOR,
-	TOKEN_REDIR_IN,
-	TOKEN_REDIR_OUT,
-	TOKEN_REDIR_APPEND,
-}t_token_type;
-
+extern volatile sig_atomic_t	g_signal_received;
 
 typedef struct s_cmd
 {
@@ -45,12 +36,6 @@ typedef struct s_cmd
 	char			*heredoc_delimiter;
 	struct s_cmd	*next;
 }t_cmd;
-
-typedef struct s_token
-{
-	char			*value;
-	t_token_type	type;
-}t_token;
 
 typedef struct s_varlst
 {
@@ -63,9 +48,8 @@ typedef struct s_env
 {
 	char		**envp;
 	t_varlst	*envp_list;
-	char		*key;
-	char		*value;
 	long long	exit_status;
+	int			exec_flag;
 }t_env;
 
 //_______________________minishell.c_______________________________
@@ -85,6 +69,10 @@ void		ft_fd_rdrapp(t_cmd *temp);
 void		ft_fd_rdr2(t_cmd *temp);
 void		ft_fd_heredoc(t_cmd *temp);
 void		ft_pipe(t_cmd *temp);
+int			ft_is_operator(char *str);
+int			ft_array_len(char **array);
+void		ft_return_and_exit(char *error, int exit_status, t_env *env);
+int			ft_token_len(char *input, int i);
 
 //_______________________input.c___________________________________
 char		*ft_get_input(void);
@@ -141,5 +129,15 @@ void		ft_unset(const t_cmd *cmd, t_env *env);
 
 //_______________________ft_clear.c_________________________________
 void		ft_clear(void);
+
+//_______________________signal_handler.c___________________________
+void		signal_handler(int signum);
+void		child_signal_handler(int signum);
+void		init_signal_handler(void);
+
+//_______________________free_memory.c______________________________
+// void		free_all(t_cmd *cmd, t_env *env);
+// void		free_cmd(t_cmd *cmd);
+// void		free_env_lst(t_env *env);
 
 #endif
