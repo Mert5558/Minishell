@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:11:55 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/03 12:54:48 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:54:28 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_cmd	*ft_parser(char *input, t_env *env)
 	if (env->exec_flag == 0)
 	{
 		array = ft_create_array(input, env);
+		free(input);
 		if (!array)
 			return (NULL);
 		while (array[i] != NULL)
@@ -131,6 +132,7 @@ t_cmd	*ft_parser(char *input, t_env *env)
 			temp = ft_create_next_node(temp, array, &i);
 		}
 		temp->next = NULL;
+		free(array);
 	}
 	return (ft_set_fds(cmd_head));
 }

@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/03 12:58:32 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/07 12:00:43 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void		ft_return_and_exit(char *error, int exit_status, t_env *env);
 int			ft_token_len(char *input, int i);
 
 //_______________________input.c___________________________________
-char		*ft_get_input(void);
+char		*ft_get_input(t_env *env);
 int			ft_check_input(char *input, t_env *env);
 
 //_______________________input2.c__________________________________
@@ -136,8 +136,8 @@ void		child_signal_handler(int signum);
 void		init_signal_handler(void);
 
 //_______________________free_memory.c______________________________
-// void		free_all(t_cmd *cmd, t_env *env);
-// void		free_cmd(t_cmd *cmd);
-// void		free_env_lst(t_env *env);
+void		free_all(t_cmd *cmd, t_env *env);
+void		free_cmd(t_cmd *cmd);
+void		free_env_lst(t_env *env);
 
 #endif

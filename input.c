@@ -6,26 +6,27 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/02 13:57:34 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/07 13:46:44 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_input()
+char	*ft_get_input(t_env *env)
 {
 	char	*input;
 
 	input = readline(" -- minishell -- $ ");
-	if (g_signal_received == SIGINT)
-	{
-		//free_cmd(cmd);
-		return (NULL);
-	}
 	if (input == NULL || ft_strcmp(input, "exit") == 0)
 	{
-		printf("exit");
+		free(input);
+		printf("exit\n");
 		exit (0);
+	}
+	else if (g_signal_received == 130)
+	{
+		env->exit_status = 130;
+		return (input);
 	}
 	return (input);
 }
@@ -59,11 +60,6 @@ int	ft_check_quotes(char *input)
 
 int	ft_check_input(char *input, t_env *env)
 {
-	if (input == NULL)
-	{
-		ft_return_and_exit("Error: input is NULL", 1, env);
-		return (1);
-	}
 	if (input[0] == '\0')
 	{
 		ft_return_and_exit(NULL, 2, env);
