@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:57:29 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/24 15:18:38 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/10 15:34:37 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_fd_rdr(t_cmd *temp)
 {
-	temp->output_fd = open(temp->next->args[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	temp->output_fd = open(temp->next->args[0],
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (temp->output_fd == -1)
 	{
 		perror("open");
@@ -23,7 +24,8 @@ void	ft_fd_rdr(t_cmd *temp)
 
 void	ft_fd_rdrapp(t_cmd *temp)
 {
-	temp->output_fd = open(temp->next->args[0], O_WRONLY | O_CREAT | O_APPEND, 0644);
+	temp->output_fd = open(temp->next->args[0],
+			O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (temp->output_fd == -1)
 	{
 		perror("open");
@@ -51,7 +53,7 @@ void	ft_fd_heredoc(t_cmd *temp)
 	while (1)
 	{
 		input = readline("heredoc> ");
-		if (ft_strcmp(input, temp->next->args[0]) == 0)
+		if (input == NULL || ft_strcmp(input, temp->next->args[0]) == 0)
 		{
 			free(input);
 			break ;
@@ -72,14 +74,14 @@ void	ft_pipe(t_cmd *temp)
 	{
 		perror("pipe");
 	}
-	temp->output_fd = pipe_fd[0];
+	temp->output_fd = pipe_fd[1];
 	if (temp->output_fd == -1)
 	{
 		perror("pipe");
 	}
 	if (temp->next != NULL)
 	{
-		temp->next->input_fd = pipe_fd[1];
+		temp->next->input_fd = pipe_fd[0];
 		if (temp->next->input_fd == -1)
 		{
 			perror("pipe");
