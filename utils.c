@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:20:50 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/03 12:58:52 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/07 12:01:15 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,34 +74,6 @@ int	ft_count_tokens(char *input)
 		count += count_meta_operator(&input);
 		handle_token_flags(*input, &flag, &count, quotes);
 		input++;
-		// if (*input == '|' || *input == '&' || *input == ';')
-		// 	count += !quotes;
-		// else if (*input == '>')
-		// {
-		// 	if (*(input + 1) == '>')
-		// 		input++;
-		// 	count += !quotes;
-		// }
-		// else if (*input == '<')
-		// {
-		// 	if (*(input + 1) == '<')
-		// 		input++;
-		// 	count += !quotes;
-		// }
-		// if ((*input == '"' || *input == '\'') && *input == *(input + 1))
-		// 	input++;
-		// else if (*input == '"' || *input == '\'')
-		// 	quotes = !quotes;
-		// if (*input != ' ' && *input != '|' && *input != '&' && *input != ';'
-		// 	&& *input != '>' && *input != '<' && !flag && !quotes)
-		// {
-		// 	flag = 1;
-		// 	count++;
-		// }
-		// else if (*input == ' ' || *input == '|' || *input == '&'
-		// 	|| *input == ';' || *input == '>' || *input == '<')
-		// 	flag = 0;
-		// input++;
 	}
 	return (count);
 }

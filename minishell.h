@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/07 12:00:43 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/13 15:46:08 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_env
 }t_env;
 
 //_______________________minishell.c_______________________________
+void		shell_loop(t_cmd *cmd, t_env *env);
+
 //_______________________ft_parser.c_______________________________
 t_cmd		*ft_parser(char *input, t_env *env);
 t_cmd		*ft_set_fds(t_cmd *temp);
@@ -67,12 +69,13 @@ void		ft_return_and_exit(char *error, int exit_status, t_env *env);
 void		ft_fd_rdr(t_cmd *temp);
 void		ft_fd_rdrapp(t_cmd *temp);
 void		ft_fd_rdr2(t_cmd *temp);
-void		ft_fd_heredoc(t_cmd *temp);
 void		ft_pipe(t_cmd *temp);
 int			ft_is_operator(char *str);
-int			ft_array_len(char **array);
+int			ft_array_len(char **array, int i);
 void		ft_return_and_exit(char *error, int exit_status, t_env *env);
 int			ft_token_len(char *input, int i);
+void		ft_fd_heredoc(t_cmd *temp);
+void		ft_heredoc_process(t_cmd *temp, int pipe_fd);
 
 //_______________________input.c___________________________________
 char		*ft_get_input(t_env *env);
@@ -92,6 +95,10 @@ void		ft_init(char **envp, t_env *env);
 void		add_varlst_node(t_varlst **head, t_varlst *new_node);
 t_varlst	*new_varlst_node(char *var_name, char *var_value);
 
+//_______________________ft_child_process.c___________________________
+void		child_process(const t_cmd *cmd, t_env *env);
+void		wait_child_process(const t_cmd *cmd, t_env *env, int pid);
+
 //_______________________ft_check_args.c___________________________
 void		*ft_check_args(const t_cmd *cmd, t_env *env);
 void		redirect_fd(const t_cmd *cmd);
@@ -104,7 +111,8 @@ char		*ft_append_char_struct(const t_cmd *cmd, int i);
 void		ft_echo(const t_cmd *cmd);
 
 //_______________________ft_cd.c___________________________________
-void		ft_cd(const t_cmd *cmd);
+void		ft_cd(const t_cmd *cmd, t_env *env);
+void		check_home_path(t_varlst *varlst, char **path);
 
 //_______________________ft_pwd.c__________________________________
 void		ft_pwd(void);
@@ -112,6 +120,7 @@ void		ft_pwd(void);
 //_______________________ft_exe.c__________________________________
 void		ft_exe(const t_cmd *cmd, t_env *env);
 void		ft_exe2(const t_cmd *cmd, t_env *env, char **tmp_path);
+void		ft_exe3(const t_cmd *cmd, t_env *env, char *tmp, char **tmp_path);
 
 //_______________________ft_export.c_______________________________
 void		ft_export(const t_cmd *cmd, t_env *env);

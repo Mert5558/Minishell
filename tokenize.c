@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:12:32 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/02 14:03:48 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/08 12:56:41 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ char	*ft_expand(char *input, int *i, t_env *env)
 {
 	int		len;
 	char	*token;
+	char	*cut_token;
 
 	len = ft_token_len(input, *i);
-	token = ft_handle_dollar(ft_cut(input, *i, len), env);
+	cut_token = ft_cut(input, *i, len);
+	token = ft_handle_dollar(cut_token, env);
 	*i = *i + len;
+	free(cut_token);
 	return (token);
 }
 

@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:54:54 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/07 14:49:00 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/13 16:05:33 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_check_op(char *input, t_env *env)
 	{
 		if (input[i] == '\'' || input[i] == '\"')
 			quote = 1;
-		if (ft_is_invalid(input[i], input[i + 1]) && quote == 0)
+		if (ft_is_invalid(input[i], input[i + 1] && quote == 0))
 		{
 			ft_return_and_exit("Error: syntax error", 1, env);
 			return (1);
@@ -104,7 +104,7 @@ int	ft_check_syntax_op(char *input, t_env *env)
 				return (1);
 			if (input[i] == '<' || input[i] == '>' || input[i] == '|')
 			{
-				ft_return_and_exit("Error: syntax error", 1, env);
+				ft_return_and_exit("Error: syntax error", 2, env);
 				return (1);
 			}
 		}

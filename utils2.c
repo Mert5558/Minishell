@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:57:29 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/10 15:34:37 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/13 15:34:58 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_fd_rdr(t_cmd *temp)
 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (temp->output_fd == -1)
 	{
+		g_signal_received = 1;
 		perror("open");
 	}
 }
@@ -28,6 +29,7 @@ void	ft_fd_rdrapp(t_cmd *temp)
 			O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (temp->output_fd == -1)
 	{
+		g_signal_received = 1;
 		perror("open");
 	}
 }
@@ -37,33 +39,9 @@ void	ft_fd_rdr2(t_cmd *temp)
 	temp->input_fd = open(temp->next->args[0], O_RDONLY);
 	if (temp->input_fd == -1)
 	{
+		g_signal_received = 1;
 		perror("open");
 	}
-}
-
-void	ft_fd_heredoc(t_cmd *temp)
-{
-	int		pipe_fd[2];
-	char	*input;
-
-	if (pipe(pipe_fd) == -1)
-	{
-		perror("pipe failed");
-	}
-	while (1)
-	{
-		input = readline("heredoc> ");
-		if (input == NULL || ft_strcmp(input, temp->next->args[0]) == 0)
-		{
-			free(input);
-			break ;
-		}
-		write(pipe_fd[1], input, strlen(input));
-		write(pipe_fd[1], "\n", 1);
-		free(input);
-	}
-	close(pipe_fd[1]);
-	temp->input_fd = pipe_fd[0];
 }
 
 void	ft_pipe(t_cmd *temp)

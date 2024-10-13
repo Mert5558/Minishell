@@ -6,11 +6,22 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:51:08 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/11 16:02:43 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/13 16:15:26 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_fix_help(t_cmd *current)
+{
+	t_cmd	*delete;
+
+	current->output_fd = current->next->output_fd;
+	delete = current->next;
+	current->next = current->next->next;
+	delete->next = NULL;
+	free_cmd(delete);
+}
 
 t_cmd	*ft_fix_struct(t_cmd *cmd_head)
 {
@@ -22,19 +33,18 @@ t_cmd	*ft_fix_struct(t_cmd *cmd_head)
 		&& current->next->operator
 		&& ft_strcmp(current->next->operator, "|") == 0)
 	{
-		current->output_fd = current->next->output_fd;
-		delete = current->next;
-		current->next = current->next->next;
-		delete->next = NULL;
-		free_cmd(delete);
+		ft_fix_help(current);
 	}
 	else if (current->operator && ft_strcmp(current->operator, "<<") == 0
 		&& current->next->operator)
 	{
-		current->output_fd = current->next->output_fd;
+		ft_fix_help(current);
+	}
+	else if (current->operator && current->next && !current->next->operator
+		&& ft_strcmp(current->operator, "|") != 0)
+	{
 		delete = current->next;
-		current->next = current->next->next;
-		delete->next = NULL;
+		current->next = NULL;
 		free_cmd(delete);
 	}
 	return (cmd_head);
@@ -58,6 +68,11 @@ t_cmd	*ft_set_fds(t_cmd *temp)
 		else if (ft_strcmp(temp->operator, "|") == 0)
 			ft_pipe(temp);
 		temp = temp->next;
+	}
+	if (1 == g_signal_received)
+	{
+		free_cmd(new_head);
+		return (NULL);
 	}
 	new_head = ft_fix_struct(new_head);
 	return (new_head);

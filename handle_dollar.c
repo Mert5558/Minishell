@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 14:36:45 by merdal            #+#    #+#             */
-/*   Updated: 2024/09/30 15:27:32 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/11 14:50:16 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ char	*ft_search_env_variable(char *env_variable, t_env *env)
 		}
 		current = current->next;
 	}
-	return ("\0");
+	new_variable = malloc(sizeof (char) * 1);
+	new_variable[0] = '\0';
+	return (new_variable);
 }
 
 char	*ft_single_dollar(char *new_input)
@@ -51,42 +53,43 @@ char	*ft_replace(char *input, int i, t_env *env)
 
 	i++;
 	len = i;
-	j = 0;
+	j = -1;
 	new_input = NULL;
 	if (!input[i] || input[i] == ' ' || input[i] == '\"' || input[i] == '\'')
 		return (ft_single_dollar(new_input));
-	while (input[len] && input[len] != '\"' && input[len] != '\'' && input[len] != ' ')
+	while (input[len] && input[len]
+		!= '\"' && input[len] != '\'' && input[len] != ' ')
 		len++;
 	env_variable = malloc(sizeof(char) * (len - i) + 1);
 	if (!env_variable)
 		return (NULL);
-	while (j < len)
+	while (++j < len)
 	{
 		env_variable[j] = input[i];
 		i++;
-		j++;
 	}
 	new_input = ft_search_env_variable(env_variable, env);
+	free(env_variable);
 	return (new_input);
 }
 
 char	*ft_exitstatus(t_env *env)
 {
 	char	*exit;
-	
+
 	exit = ft_lltoa(env->exit_status);
-	env->exit_status = 0;
 	return (exit);
 }
 
 char	*ft_handle_dollar(char *input, t_env *env)
 {
 	int		i;
-	int 	quote;
-	char	*new_input = NULL;
+	int		quote;
+	char	*new_input;
 
 	i = 0;
 	quote = 0;
+	new_input = NULL;
 	while (input[i])
 	{
 		if (input[i] == '\"')

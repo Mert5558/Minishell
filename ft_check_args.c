@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:23:00 by mgering           #+#    #+#             */
-/*   Updated: 2024/09/30 12:35:14 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/13 15:16:46 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	*ft_check_args(const t_cmd *cmd, t_env *env)
 	const t_cmd	*tmp_cmd;
 
 	tmp_cmd = cmd;
+	if (tmp_cmd == NULL)
+	{
+		env->exit_status = g_signal_received;
+		return (NULL);
+	}
 	if (tmp_cmd->args == NULL)
 		return (NULL);
 	if (env->exec_flag == 1)
@@ -33,6 +38,33 @@ void	*ft_check_args(const t_cmd *cmd, t_env *env)
 		tmp_cmd = tmp_cmd->next;
 	}
 	return (NULL);
+}
+
+void	execute_parent(const t_cmd *cmd, t_env *env)
+{
+	redirect_fd(cmd);
+	if (0 == ft_strcmp(cmd->args[0], "cd"))
+		ft_cd(cmd, env);
+	else if (0 == ft_strcmp(cmd->args[0], "export"))
+		ft_export(cmd, env);
+	else if (0 == ft_strcmp(cmd->args[0], "unset"))
+		ft_unset(cmd, env);
+}
+
+void	execute_child(const t_cmd *cmd, t_env *env)
+{
+	int	pid ;
+
+	pid = fork();
+	if (pid == 0)
+		child_process(cmd, env);
+	else if (pid > 0)
+		wait_child_process(cmd, env, pid);
+	else
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	redirect_fd(const t_cmd *cmd)
@@ -54,48 +86,6 @@ void	redirect_fd(const t_cmd *cmd)
 			exit(EXIT_FAILURE);
 		}
 		close(cmd->output_fd);
-	}
-}
-
-void	execute_parent(const t_cmd *cmd, t_env *env)
-{
-	redirect_fd(cmd);
-	if (0 == ft_strcmp(cmd->args[0], "cd"))
-		ft_cd(cmd);
-	else if (0 == ft_strcmp(cmd->args[0], "export"))
-		ft_export(cmd, env);
-	else if (0 == ft_strcmp(cmd->args[0], "unset"))
-		ft_unset(cmd, env);
-	//else if (0 == ft_strcmp(cmd->args[0], "exit"))
-	//	ft_exit(cmd, env);
-}
-
-void	execute_child(const t_cmd *cmd, t_env *env)
-{
-	int	pid ;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		signal(SIGINT, child_signal_handler);
-		redirect_fd(cmd);
-		check_executable(cmd, env);
-		exit(EXIT_SUCCESS);
-	}
-	else if (pid > 0)
-	{
-		signal (SIGINT, SIG_IGN);
-		wait(NULL);
-		init_signal_handler();
-		if (cmd->input_fd != STDIN_FILENO)
-			close(cmd->input_fd);
-		if (cmd->output_fd != STDOUT_FILENO)
-			close(cmd->output_fd);
-	}
-	else
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
 	}
 }
 

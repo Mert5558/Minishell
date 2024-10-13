@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/07 13:46:44 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/13 16:00:27 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ char	*ft_get_input(t_env *env)
 	char	*input;
 
 	input = readline(" -- minishell -- $ ");
-	if (input == NULL || ft_strcmp(input, "exit") == 0)
+	if (input == NULL || ft_strnstr(input, "exit", 4) != NULL)
 	{
-		free(input);
+		free_env_lst(env);
 		printf("exit\n");
 		exit (0);
 	}
@@ -62,7 +62,7 @@ int	ft_check_input(char *input, t_env *env)
 {
 	if (input[0] == '\0')
 	{
-		ft_return_and_exit(NULL, 2, env);
+		ft_return_and_exit(NULL, 0, env);
 		return (1);
 	}
 	if (ft_check_quotes(input))
@@ -70,8 +70,11 @@ int	ft_check_input(char *input, t_env *env)
 		ft_return_and_exit("Error: unclosed quotes", 2, env);
 		return (1);
 	}
-	ft_check_syntax(input, env);
-	ft_check_op(input, env);
-	ft_check_syntax_op(input, env);
+	if (env->exec_flag == 0)
+		ft_check_syntax(input, env);
+	if (env->exec_flag == 0)
+		ft_check_op(input, env);
+	if (env->exec_flag == 0)
+		ft_check_syntax_op(input, env);
 	return (0);
 }
