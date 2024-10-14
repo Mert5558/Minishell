@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/13 15:41:25 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/14 15:42:34 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,6 @@ volatile sig_atomic_t	g_signal_received = 0;
 }
 	atexit(check_leaks); */
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_env				*env;
-	t_cmd				*cmd;
-
-	(void)argv;
-	if (argc != 1)
-	{
-		printf("Error: too many arguments\n");
-		return (1);
-	}
-	cmd = NULL;
-	env = malloc(sizeof(t_env));
-	env->envp = envp;
-	init_signal_handler();
-	ft_init(envp, env);
-	while (1)
-		shell_loop(cmd, env);
-	return (0);
-}
-
-void	shell_loop(t_cmd *cmd, t_env *env)
-{
-	char				*input;
-
-	g_signal_received = 0;
-	input = ft_get_input(env);
-	ft_check_input(input, env);
-	if (input[0] != '\0')
-		add_history(input);
-	cmd = ft_parser(input, env);
-	ft_check_args(cmd, env);
-	env->exec_flag = 0;
-	free_cmd(cmd);
-}
-
-/* 
-//print_cmd_struct(cmd);
 void	print_cmd_struct(const t_cmd *cmd)
 {
 	int i = 0;
@@ -93,4 +55,43 @@ void	print_cmd_struct(const t_cmd *cmd)
 			break; // Exit the loop if there is no next command
 		}
 	}
-} */
+}
+int	main(int argc, char **argv, char **envp)
+{
+	t_env				*env;
+	t_cmd				*cmd;
+
+	(void)argv;
+	if (argc != 1)
+	{
+		printf("Error: too many arguments\n");
+		return (1);
+	}
+	cmd = NULL;
+	env = malloc(sizeof(t_env));
+	env->envp = envp;
+	init_signal_handler();
+	ft_init(envp, env);
+	while (1)
+		shell_loop(cmd, env);
+	return (0);
+}
+
+void	shell_loop(t_cmd *cmd, t_env *env)
+{
+	char				*input;
+
+	g_signal_received = 0;
+	input = ft_get_input(env);
+	ft_check_input(input, env);
+	if (input[0] != '\0')
+		add_history(input);
+	cmd = ft_parser(input, env);
+	print_cmd_struct(cmd);
+	ft_check_args(cmd, env);
+	env->exec_flag = 0;
+	free_cmd(cmd);
+}
+
+
+//print_cmd_struct(cmd);

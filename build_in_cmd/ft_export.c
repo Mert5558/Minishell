@@ -6,7 +6,7 @@
 /*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:16:42 by mgering           #+#    #+#             */
-/*   Updated: 2024/10/12 12:25:57 by mgering          ###   ########.fr       */
+/*   Updated: 2024/10/13 17:12:49 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_export(const t_cmd *cmd, t_env *env)
 	{
 		while (templst)
 		{
-			printf("%s=\"%s\"\n",
+			printf("declare -x %s=\"%s\"\n",
 				templst->var_name, templst->var_value);
 			templst = templst->next;
 		}
