@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
+/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/13 17:04:24 by mgering          ###   ########.fr       */
+/*   Updated: 2024/10/15 12:12:02 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_get_input(t_env *env)
 	char	*input;
 
 	input = readline(" -- minishell -- $ ");
-	if (input == NULL || ft_strnstr(input, "exit", 4) != NULL)
+	if (input == NULL)
 	{
 		free_env_lst(env);
 		printf("exit\n");

@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:23:00 by mgering           #+#    #+#             */
-/*   Updated: 2024/10/14 15:59:16 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/15 12:13:07 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	execute_parent(const t_cmd *cmd, t_env *env)
 		ft_export(cmd, env);
 	else if (0 == ft_strcmp(cmd->args[0], "unset"))
 		ft_unset(cmd, env);
+	else if (0 == ft_strcmp(cmd->args[0], "exit"))
+		ft_exit(cmd, env);
 }
 
 void	execute_child(const t_cmd *cmd, t_env *env)

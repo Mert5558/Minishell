@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
+/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/13 15:46:08 by mgering          ###   ########.fr       */
+/*   Updated: 2024/10/15 12:14:35 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void		ft_env(t_env *env);
 void		ft_unset(const t_cmd *cmd, t_env *env);
 
 //_______________________ft_exit.c_________________________________
+void		ft_exit(const t_cmd *cmd, t_env *env);
 
 //_______________________ft_clear.c_________________________________
 void		ft_clear(void);
