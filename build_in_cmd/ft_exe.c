@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
+/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:05:08 by mgering           #+#    #+#             */
-/*   Updated: 2024/10/11 14:44:42 by mgering          ###   ########.fr       */
+/*   Updated: 2024/10/15 10:52:32 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_exe2(const t_cmd *cmd, t_env *env, char **tmp_path)
 		tmp = ft_strjoin("/", cmd->args[0]);
 		ft_exe3(cmd, env, tmp, tmp_path);
 		free(tmp);
-		printf("command not found\n");
+		printf("%s: command not found\n", cmd->args[0]);
 		exit(127);
 	}
 }

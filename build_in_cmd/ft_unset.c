@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
+/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:48 by mgering           #+#    #+#             */
-/*   Updated: 2024/10/10 13:49:52 by mgering          ###   ########.fr       */
+/*   Updated: 2024/10/15 15:15:47 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_unset(const t_cmd *cmd, t_env *env)
 	t_varlst	**current;
 	t_varlst	*temp;
 
+	if (cmd->args[1] == NULL)
+		return ;
 	current = &env->envp_list;
 	while (*current)
 	{
