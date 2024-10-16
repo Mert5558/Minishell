@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:56:22 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/13 16:00:23 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/16 16:39:07 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ int	ft_token_len(char *input, int i)
 		if (input[i] == '\"' || input[i] == '\'')
 			ft_skip_quotes(input, &i);
 		else
+		{
 			i++;
-		len++;
+			len++;
+		}
 	}
 	return (len);
 }

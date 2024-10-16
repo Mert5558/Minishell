@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:19:36 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/15 13:49:41 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/16 16:07:30 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	shell_loop(t_cmd *cmd, t_env *env)
 	if (input[0] != '\0')
 		add_history(input);
 	cmd = ft_parser(input, env);
-	//print_cmd_struct(cmd);
+	print_cmd_struct(cmd);
 	ft_check_args(cmd, env);
 	env->exec_flag = 0;
 	free_cmd(cmd);

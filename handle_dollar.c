@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
+/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 14:36:45 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/11 14:50:16 by mgering          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:29:28 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ char	*ft_search_env_variable(char *env_variable, t_env *env)
 		}
 		current = current->next;
 	}
-	new_variable = malloc(sizeof (char) * 1);
-	new_variable[0] = '\0';
+	new_variable = NULL;
 	return (new_variable);
 }
 
@@ -100,7 +99,7 @@ char	*ft_handle_dollar(char *input, t_env *env)
 			new_input = ft_replace(input, i, env);
 		i++;
 	}
-	if (new_input == NULL)
-		new_input = ft_strdup(input);
+	// if (new_input == NULL)
+	// 	new_input = ft_strdup(input);
 	return (new_input);
 }
