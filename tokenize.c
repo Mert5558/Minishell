@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:12:32 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/16 16:22:19 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/17 13:33:08 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char	*ft_handle_quotes(char *input, int *i, t_env *env)
 	char	quote;
 	char	*token;
 
-	quote = input[(*i)++];
+	while (input[*i] == '\'' || input[*i] == '\"')
+		quote = input[(*i)++];
 	len = 0;
 	while (input[*i + len] && input[*i + len] != quote)
 		len++;

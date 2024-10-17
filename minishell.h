@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:07:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/16 14:04:40 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/17 12:37:36 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		ft_return_and_exit(char *error, int exit_status, t_env *env);
 int			ft_token_len(char *input, int i);
 void		ft_fd_heredoc(t_cmd *temp);
 void		ft_heredoc_process(t_cmd *temp, int pipe_fd);
+int			ft_isspace(char c);
 
 //_______________________input.c___________________________________
 char		*ft_get_input(t_env *env);
