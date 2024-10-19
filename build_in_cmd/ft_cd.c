@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:52:57 by mgering           #+#    #+#             */
-/*   Updated: 2024/10/16 14:08:00 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/17 15:07:05 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_update_pwd_varlst(t_varlst *varlst, char *old_pwd)
 		perror("getcwd");
 }
 
-char	*ft_get_cd_target(const t_cmd *cmd, t_varlst *varlst)
+char	*ft_get_cd_target(t_cmd *cmd, t_varlst *varlst)
 {
 	char	*path;
 
@@ -78,7 +78,7 @@ char	*ft_get_cd_target(const t_cmd *cmd, t_varlst *varlst)
 	return (path);
 }
 
-void	ft_cd(const t_cmd *cmd, t_env *env)
+void	ft_cd(t_cmd *cmd, t_env *env)
 {
 	char		*path;
 	char		*old_pwd;

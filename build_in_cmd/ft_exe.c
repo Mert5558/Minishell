@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exe.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:05:08 by mgering           #+#    #+#             */
-/*   Updated: 2024/10/15 10:52:32 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/17 15:07:37 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_exe(const t_cmd *cmd, t_env *env)
+void	ft_exe(t_cmd *cmd, t_env *env)
 {
 	char		**path;
 	char		**tmp_path;
@@ -41,7 +41,7 @@ void	ft_exe(const t_cmd *cmd, t_env *env)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_exe2(const t_cmd *cmd, t_env *env, char **tmp_path)
+void	ft_exe2(t_cmd *cmd, t_env *env, char **tmp_path)
 {
 	char		*tmp;
 
@@ -56,7 +56,7 @@ void	ft_exe2(const t_cmd *cmd, t_env *env, char **tmp_path)
 	}
 }
 
-void	ft_exe3(const t_cmd *cmd, t_env *env, char *tmp, char **tmp_path)
+void	ft_exe3(t_cmd *cmd, t_env *env, char *tmp, char **tmp_path)
 {
 	char	*dir_path;
 

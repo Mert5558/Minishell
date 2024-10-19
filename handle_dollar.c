@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 14:36:45 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/16 16:48:44 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/18 19:26:46 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,5 @@ char	*ft_handle_dollar(char *input, t_env *env)
 			new_input = ft_replace(input, i, env);
 		i++;
 	}
-	// if (new_input == NULL)
-	// 	new_input = ft_strdup(input);
 	return (new_input);
 }

@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:48 by mgering           #+#    #+#             */
-/*   Updated: 2024/10/15 15:15:47 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/17 13:26:46 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_unset(const t_cmd *cmd, t_env *env)
+void	ft_unset(t_cmd *cmd, t_env *env)
 {
 	t_varlst	**current;
 	t_varlst	*temp;
+	int			i;
 
-	if (cmd->args[1] == NULL)
-		return ;
-	current = &env->envp_list;
-	while (*current)
+	i = 0;
+	while (cmd->args[++i])
 	{
-		if (ft_strcmp(cmd->args[1], (*current)->var_name) == 0)
+		current = &env->envp_list;
+		while (*current)
 		{
-			temp = *current;
-			*current = (*current)->next;
-			free(temp->var_name);
-			free(temp->var_value);
-			free(temp);
-			return ;
+			if (ft_strcmp(cmd->args[i], (*current)->var_name) == 0)
+			{
+				temp = *current;
+				*current = (*current)->next;
+				free(temp->var_name);
+				free(temp->var_value);
+				free(temp);
+			}
+			else
+				current = &(*current)->next;
 		}
-		else
-			current = &(*current)->next;
 	}
 }

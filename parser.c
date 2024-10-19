@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:11:55 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/15 16:06:29 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/18 19:32:15 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_cmd	*ft_new_node(void)
 	node->input_fd = STDIN_FILENO;
 	node->output_fd = STDOUT_FILENO;
 	node->heredoc_delimiter = NULL;
+	node->prev = NULL;
 	node->next = NULL;
 	return (node);
 }
@@ -62,6 +63,7 @@ t_cmd	*ft_create_next_node(t_cmd *temp, char **array, int *i)
 	if (array[*i] != NULL)
 	{
 		temp->next = ft_new_node();
+		temp->next->prev = temp;
 		return (temp->next);
 	}
 	return (temp);

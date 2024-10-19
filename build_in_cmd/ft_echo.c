@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 16:22:46 by mgering           #+#    #+#             */
-/*   Updated: 2024/10/17 11:55:43 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/17 15:04:01 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_is_n(char *str)
 	return (0);
 }
 
-void	ft_echo(const t_cmd *cmd)
+void	ft_echo(t_cmd *cmd)
 {
 	char	*str_struct;
 
@@ -58,7 +58,7 @@ void	ft_echo(const t_cmd *cmd)
 		free(str_struct);
 }
 
-char	*ft_append_char_struct(const t_cmd *cmd, int i)
+char	*ft_append_char_struct(t_cmd *cmd, int i)
 {
 	char	*append;
 	int		len;

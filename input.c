@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgering <mgering@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 11:54:14 by merdal            #+#    #+#             */
-/*   Updated: 2024/10/17 14:08:40 by merdal           ###   ########.fr       */
+/*   Updated: 2024/10/17 17:07:47 by mgering          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_check_operator(const char *input, int *i, t_env *env)
+int	ft_check_operator(char *input, int *i, t_env *env)
 {
-	const char	*operators[] = {">>", ">", "<<", "<", "|", NULL};
-	int			j;
-	int			op_len;
+	char	**operators;
+	int		j;
+	int		op_len;
 
+	operators = ft_init_op();
 	j = 0;
 	while (operators[j] != NULL)
 	{
@@ -28,14 +29,13 @@ int	ft_check_operator(const char *input, int *i, t_env *env)
 			while (input[*i] != '\0' && ft_isspace((unsigned char)input[*i]))
 				(*i)++;
 			if (input[*i] == '\0' || ft_isspace((unsigned char)input[*i]))
-			{
 				ft_return_and_exit("Error: syntax error operator", 1, env);
-				return (1);
-			}
+			free(operators);
 			return (1);
 		}
 		j++;
 	}
+	free(operators);
 	return (0);
 }
 
