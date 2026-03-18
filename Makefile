@@ -11,21 +11,21 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
-LDFLAGS = -Llibft -lft -lreadline
+CFLAGS = -Wall -Werror -Wextra -ILibft/src
+LDFLAGS = -LLibft -lft -lreadline
 NAME = 	minishell
 
-SRCS =	minishell.c input.c input2.c handle_dollar.c \
-		ft_init.c utils.c tokenize.c parser.c ft_check_args.c \
-		build_in_cmd/ft_echo.c build_in_cmd/ft_cd.c \
-		build_in_cmd/ft_pwd.c build_in_cmd/ft_exe.c build_in_cmd/ft_export.c build_in_cmd/ft_env.c build_in_cmd/ft_exit.c \
-		build_in_cmd/ft_unset.c build_in_cmd/ft_clear.c set_fds.c utils2.c utils3.c utils4.c \
-		signal_handler.c free_memory.c ft_child_process.c ft_pipe_execution.c
+SRCS =	src/minishell.c src/input.c src/input2.c src/handle_dollar.c \
+		src/ft_init.c src/utils.c src/tokenize.c src/parser.c src/ft_check_args.c \
+		src/build_in_cmd/ft_echo.c src/build_in_cmd/ft_cd.c \
+		src/build_in_cmd/ft_pwd.c src/build_in_cmd/ft_exe.c src/build_in_cmd/ft_export.c src/build_in_cmd/ft_env.c src/build_in_cmd/ft_exit.c \
+		src/build_in_cmd/ft_unset.c src/build_in_cmd/ft_clear.c src/set_fds.c src/utils2.c src/utils3.c src/utils4.c \
+		src/signal_handler.c src/free_memory.c src/ft_child_process.c src/ft_pipe_execution.c
 
 
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
-LIBFT = libft/libft.a
+LIBFT = Libft/libft.a
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -33,7 +33,7 @@ LIBFT = libft/libft.a
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	@make -C libft > /dev/null
+	@make -C Libft > /dev/null
 	@echo "\033[0;32mlibft compiled\033[0m"
 
 $(NAME): $(OBJS)
@@ -42,12 +42,12 @@ $(NAME): $(OBJS)
 
 clean:
 	@$(RM) $(OBJS)
-	@make -C libft clean > /dev/null
+	@make -C Libft clean > /dev/null
 	@echo "\033[0;32mObject files removed\033[0m"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@make -C libft fclean > /dev/null
+	@make -C Libft fclean > /dev/null
 	@echo "\033[0;32mCleaned\033[0m"
 
 re: fclean 
