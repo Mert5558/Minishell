@@ -71,11 +71,4 @@ Run the shell:
 ```bash
 ./minishell
 ```
-
-You can then execute commands like:
-
-```bash
-ls -l | grep .c > output.txt
-```
-
 ---
